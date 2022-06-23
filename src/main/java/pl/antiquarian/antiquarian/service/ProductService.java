@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import pl.antiquarian.antiquarian.model.Category;
 import pl.antiquarian.antiquarian.model.Product;
+import pl.antiquarian.antiquarian.repository.CategoryRepository;
 import pl.antiquarian.antiquarian.repository.ProductRepository;
 
 import javax.validation.Valid;
@@ -15,38 +17,31 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
 
-    public String addProduct(@Valid Product product, BindingResult result) {
-        if (result.hasErrors()) {
-            return "product";
-        }
-        product.setSoldOut(true);
-        productRepository.save(product);
-        return "redirect:/products";
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
-    public List<Product> getAllTrueProducts() {
-        return productRepository.findAllTrue(PageRequest.of(0, 10));
-    }
-
-    public List<Product> getAllFalseProducts() {
-        return productRepository.findAllFalse(PageRequest.of(0,10));
-    }
-
-    public int setTrueProduct(long id) {
-        return productRepository.setTrueById(id);
-    }
-
-    public int setFalseProduct(long id) {
-        return productRepository.setFalseById(id);
+    public Product addProduct(long categoryId, Product product) {
+        Category category = findCategoryById(categoryId);
+        product.setCategory(category);
+        return productRepository.save(product);
     }
 
     public void removeProduct(long id) {
-        productRepository.deleteById(id);
+        Product product = findProductById(id);
+        productRepository.delete(product);
     }
 
-    public int getProductsCount() {
-        return productRepository.productsCount();
+    private Category findCategoryById(long id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Category not found"));
+    }
+
+    private Product findProductById(long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Product not found"));
     }
 }
 
