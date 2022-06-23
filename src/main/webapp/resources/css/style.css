@@ -1,0 +1,125 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    position: relative;
+    height: 100vh;
+}
+
+header {
+    margin-top: 30px;
+}
+
+h3 {
+    margin-top: 60px;
+    margin-bottom: -40px;
+    margin-left: 50%;
+    transform: translateX(-65px);
+}
+
+button {
+    background-color: grey;
+    padding: 5px;
+    border: none;
+    border-radius: 8px;
+    transition: transform .4s, background-color .4s;
+}
+
+button:hover {
+    transform: scale(.95);
+    background-color: dimgrey;
+}
+
+button:focus {
+    outline: none;
+    border: 1px solid rgba(255, 255, 255, .5);
+    border-radius: 8px;
+}
+
+.error {
+    color: red;
+}
+
+.hero-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.index-view {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    font-size: 35px;
+}
+
+.antiquarian-form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 40px;
+}
+
+.form div {
+    padding: 20px;
+}
+
+/*.margin-left {*/
+/*    margin-left: 50px;*/
+/*}*/
+
+table {
+    margin-top: 10px;
+}
+
+.true-tab {
+    margin-top: 40px;
+}
+.false-tab {
+    margin-top: 120px;
+}
+
+.table {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-spacing: 1px;
+    text-align: center;
+    /*padding: 3px;*/
+}
+
+table, td, th {
+    border: 1px solid black;
+    padding: 3px;
+}
+
+thead {
+    background-color: grey;
+}
+
+tbody {
+    background-color: darkgrey;
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translateX(-300px);
+    margin-top: 30vh;
+}
+
