@@ -1,18 +1,15 @@
 package pl.antiquarian.antiquarian.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.validation.FieldError;
+import org.springframework.data.domain.Page;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
+import pl.antiquarian.antiquarian.model.Category;
 import pl.antiquarian.antiquarian.model.Product;
 import pl.antiquarian.antiquarian.service.ProductService;
 
 import javax.validation.Valid;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Validated
 @RestController
@@ -21,6 +18,11 @@ import java.util.Map;
 public class ProductController {
 
     private final ProductService productService;
+
+    @GetMapping("/categories")
+    public Page<Category> getAllCategories(@RequestParam int page, @RequestParam int size, @RequestParam String order) {
+        return productService.getAllCategories(page, size, order);
+    }
 
     @GetMapping
     public List<Product> getAllProducts() {
